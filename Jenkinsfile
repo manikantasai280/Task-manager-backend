@@ -11,7 +11,11 @@ pipeline {
 
         stage('Build Project') {
             steps {
-                bat '"C:\\Users\\manik\\Downloads\\apache-maven-3.9.14-bin\\apache-maven-3.9.14\\bin\\mvn.cmd" clean package'
+                bat '''
+                set JAVA_HOME=C:\\Program Files\\Eclipse Adoptium\\jdk-17.0.18.8-hotspot
+                set PATH=%JAVA_HOME%\\bin;%PATH%
+                "C:\\Users\\manik\\Downloads\\apache-maven-3.9.14-bin\\apache-maven-3.9.14\\bin\\mvn.cmd" clean package
+                '''
             }
         }
 
