@@ -9,19 +9,32 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build Project') {
             steps {
-                bat 'mvn clean package'
+                bat '"C:\\Program Files\\Apache\\maven\\bin\\mvn.cmd" clean package'
+            }
+        }
+
+        stage('Verify JAR') {
+            steps {
+                script {
+                    if (fileExists('target')) {
+                        bat 'dir target'
+                        echo 'SUCCESS: JAR file created'
+                    } else {
+                        error 'FAILED: JAR file not found'
+                    }
+                }
             }
         }
     }
 
     post {
         success {
-            echo 'SUCCESS'
+            echo 'FINAL STATUS: SUCCESS'
         }
         failure {
-            echo 'FAILED'
+            echo 'FINAL STATUS: FAILED'
         }
     }
 }
