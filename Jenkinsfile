@@ -3,7 +3,7 @@ pipeline {
 
     stages {
 
-        stage('Clone Repository') {
+        stage('Checkout Code') {
             steps {
                 git branch: 'main', url: 'https://github.com/manikantasai280/Task-manager-backend.git'
             }
@@ -11,20 +11,13 @@ pipeline {
 
         stage('Build Project') {
             steps {
-                bat '"C:\\Program Files\\Apache\\maven\\bin\\mvn.cmd" clean package'
+                bat '"C:\\Users\\manik\\Downloads\\apache-maven-3.9.14-bin\\apache-maven-3.9.14\\bin\\mvn.cmd" clean package'
             }
         }
 
-        stage('Verify JAR') {
+        stage('Verify Build') {
             steps {
-                script {
-                    if (fileExists('target')) {
-                        bat 'dir target'
-                        echo 'SUCCESS: JAR file created'
-                    } else {
-                        error 'FAILED: JAR file not found'
-                    }
-                }
+                bat 'dir target'
             }
         }
     }
