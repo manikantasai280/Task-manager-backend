@@ -2,9 +2,10 @@ pipeline {
     agent any
 
     stages {
+
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/manikantasai280/Task-manager-backend.git'
+                git branch: 'main', url: 'https://github.com/manikantasai280/Task-manager-backend.git'
             }
         }
 
